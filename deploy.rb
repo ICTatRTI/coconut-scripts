@@ -33,15 +33,22 @@ docker_commands = docker_commands.split(/\n/).reject! { |c| c.empty? }.map{ |com
   "sudo #{command}"
 }.join(";")
 
-command = "
-STARTPOINT=\`pwd\`
-ssh -t #{destination} \"#{docker_commands}\"
-"
+if destination != "localhost"
 
-puts "Connecting to #{destination} to do the docker install"
-puts command
-puts "Enter your password to gain sudo access on #{destination}"
-runBash command
+  command = "
+  STARTPOINT=\`pwd\`
+  ssh -t #{destination} \"#{docker_commands}\"
+  "
+
+  puts "Connecting to #{destination} to do the docker install"
+  puts command
+  puts "Enter your password to gain sudo access on #{destination}"
+  runBash command
+
+else
+  runBash docker_commands
+end
+
 
 tries = 0
 
