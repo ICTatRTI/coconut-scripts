@@ -46,7 +46,13 @@ if destination != "localhost"
   runBash command
 
 else
-  runBash docker_commands
+  osx =  /darwin|mac os/ =~ RbConfig::CONFIG['host_os']
+  if (!osx.nil? && destination == "localhost")
+    puts "OSX environment detected. Cannot use localhost as destination. Use boot2docker ip instead." 
+    exit
+  else  
+    runBash docker_commands
+  end  
 end
 
 
