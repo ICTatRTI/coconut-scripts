@@ -24,3 +24,13 @@ So to deploy this to localhost and setup couchdb with an admin user "admin" with
     ./deploy.rb localhost admin password
 
 
+**Special Note for Mac OS X environment
+
+Mac OS X uses boot2docker to run Docker containers. To install on a OS X machine, for access to the docker container within the boot2docker, you need to use the boot2docker ip address instead of "localhost" as an argument for the deploy.rb script. For example:
+
+    ./deploy.rb 192.168.59.103 admin password
+
+To find out the ip address, simply run the command within boot2docker:
+
+    boot2docker ip
+    
